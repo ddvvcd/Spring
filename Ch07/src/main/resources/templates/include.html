@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ch07::include</title>
+	</head>
+	<body>
+		<h3>타임리프 include</h3>
+		
+		<h4>include</h4>
+		<th:block th:include="/fragment/_header.html"/>
+		<main>
+			<h3>main include</h3>
+		</main>
+		<th:block th:include="/fragment/_footer.html"/>
+		<hr>
+		
+		<h4>insert</h4>
+		<div th:insert="/fragment/_header.html"></div>
+		<main>
+			<h3>main insert</h3>
+		</main>
+		<div th:insert="/fragment/_footer.html"></div>
+		
+		<hr>
+		<h4>replace</h4>
+		<div th:replace="/fragment/_header.html"></div>
+		<main>
+			<h3>main replace</h3>
+		</main>
+		<div th:replace="/fragment/_footer.html"></div>
+		<hr>
+		
+	</body>
+</html>
