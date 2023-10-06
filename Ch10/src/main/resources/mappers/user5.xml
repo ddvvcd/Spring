@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ch10.mapper.User5Mapper">
+  
+  <insert id="insertUser5">
+		INSERT INTO USER5 VALUES (#{name}, #{gender}, #{age}, #{addr})
+	</insert>
+	<select id="selectUser5" resultType="kr.ch10.dto.User5DTO">
+		SELECT * FROM USER5 WHERE name=#{name} FETCH FIRST 1 ROWS ONLY
+	</select>
+	<select id="selectUser5s" resultType="kr.ch10.dto.User5DTO">
+		SELECT * FROM USER5
+	</select>
+	<update id="updateUser5">
+		UPDATE USER5 SET
+			gender=#{gender},
+			age=#{age},
+			addr=#{addr}
+		WHERE
+			name=#{name}
+	</update>
+	<delete id="deleteUser5">
+		DELETE FROM USER5 WHERE name=#{name}
+	</delete>
+</mapper>
