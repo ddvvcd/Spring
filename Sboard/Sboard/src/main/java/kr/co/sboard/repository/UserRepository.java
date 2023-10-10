@@ -1,2 +1,7 @@
-package kr.co.sboard.repository;public class UserRepository {
+package kr.co.sboard.repository;
+
+import kr.co.sboard.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 }
