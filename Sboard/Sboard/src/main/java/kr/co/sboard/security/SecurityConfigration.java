@@ -25,7 +25,7 @@ public class SecurityConfigration {
 				.csrf(CsrfConfigurer::disable) // 메서드 참조 연산자로 람다식을 간결하게 표현
 				// 폼 로그인 설정
 				.formLogin(config -> config.loginPage("/user/login")
-						.defaultSuccessUrl("/list")
+						.defaultSuccessUrl("/")
 						.failureUrl("/user/login?success=100")
 						.usernameParameter("uid")
 						.passwordParameter("pass"))
@@ -34,6 +34,7 @@ public class SecurityConfigration {
 				.logout(config -> config
 						.logoutUrl("/user/logout")
 						.invalidateHttpSession(true)
+						.clearAuthentication(true)
 						.logoutSuccessUrl("/user/login?success=200"))
 
 
@@ -42,7 +43,8 @@ public class SecurityConfigration {
 						.requestMatchers("/admin/**").hasAuthority("ADMIN")
 						.requestMatchers("/manager/**").hasAnyAuthority("ADMIN", "MANAGER")
 						.requestMatchers("/user/**").permitAll()
-						.anyRequest().permitAll());
+						.requestMatchers("/").authenticated()
+						.requestMatchers("/vendor/**", "/js/**", "/dist/**", "/data/**", "/less/**").permitAll());
 
 		return http.build();
 	}
