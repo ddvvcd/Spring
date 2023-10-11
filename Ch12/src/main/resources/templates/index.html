@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ch12::index</title>
+	</head>
+	<body>
+		<h3>Ch12.OAuth2 실습</h3>
+		
+		<p sec:authorize="isAnonymous()">
+			<a th:href="@{/user/login}">OAuth2 로그인 실습하기</a>
+		<p sec:authorize="isAuthenticated()">
+		
+		<p sec:authorize="isAuthenticated()">
+			
+			<span>아이디 : [[${#authentication.principal.uid}]]</span><br>
+			<span>이름 : [[${#authentication.principal.name}]]</span><br>
+			<span>별명 : [[${#authentication.principal.nickname}]]</span><br>
+			<span sec:authentication="principal.role"></span><br>
+			<span sec:authentication="principal.regDate"></span><br>
+			
+			<a th:href="@{/user/logout}">로그아웃</a>
+		</p>
+		
+		
+	</body>
+</html>

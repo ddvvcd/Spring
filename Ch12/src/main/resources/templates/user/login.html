@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>user::login</title>
+	</head>
+	<body>
+		<h3>로그인</h3>
+		
+		<form>
+			<input type="text" name="uid"/>
+			<input type="text" name="pass"/>
+			<input type="submit" name="로그인"/>
+		</form>
+		
+		<a th:href="@{/oauth2/authorization/kakao}">카카오 로그인</a>
+		
+	</body>
+</html>
