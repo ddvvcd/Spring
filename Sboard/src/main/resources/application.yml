@@ -45,7 +45,8 @@ spring:
     thymeleaf:
         cache: false
         # prefix 설정을 안하면 HTML 수정 후 브라우저에서 새로고침 반영안됨
-        prefix: file:src/main/resources/templates/
+        # 그리고 반드시 classpath 경로로 쓰고 templates 마지막에 슬러쉬(/) 붙이면 배포파일 실행 안 됨
+        prefix: classpath:/templates
 
     servlet:
         multipart:

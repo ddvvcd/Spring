@@ -2,11 +2,14 @@ package kr.co.sboard.service;
 
 import kr.co.sboard.dto.ArticleDTO;
 import kr.co.sboard.dto.FileDTO;
+import kr.co.sboard.dto.PageRequestDTO;
+import kr.co.sboard.dto.PageResponseDTO;
 import kr.co.sboard.entity.ArticleEntity;
 import kr.co.sboard.repository.ArticleRepository;
 import kr.co.sboard.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -28,13 +31,27 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final FileRepository fileRepository;
+    private final ModelMapper modelMapper;
 
-    public Page<ArticleEntity> findByParent(int pg){
+    public PageResponseDTO findByParentAndCate(PageRequestDTO pageRequestDTO){
 
-        Pageable pageable = PageRequest.of(pg-1, 10, Sort.Direction.DESC, "no");
-        Page<ArticleEntity> result = articleRepository.findByParent(0, pageable);
+        Pageable pageable = pageRequestDTO.getPageable("no");
+        //아래쪽과 같음
+        //Pageable pageable = PageRequest.of(pg-1, 10, Sort.Direction.DESC, "no");
+        Page<ArticleEntity> result = articleRepository.findByParentAndCate(0, pageRequestDTO.getCate(), pageable);
 
-        return result;
+        List<ArticleDTO> dtoList = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ArticleDTO.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                              .pageRequestDTO(pageRequestDTO)
+                                .dtoList(dtoList)
+                                .total(totalElement)
+                                .build();
     }
 
     public void save(ArticleDTO dto){

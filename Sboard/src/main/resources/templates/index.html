@@ -275,20 +275,19 @@
                         <!-- /input-group -->
                     </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>공지사항</a>
+                        <a th:href="@{/article/list(cate=notice)}"><i class="fa fa-dashboard fa-fw"></i>공지사항</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>자유게시판</a>
-                        <!-- /.nav-second-level -->
+                        <a th:href="@{/article/list(cate=free)}"><i class="fa fa-bar-chart-o fa-fw"></i>자유게시판</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i>문의하기</a>
+                        <a th:href="@{/article/list(cate=qna)}"><i class="fa fa-table fa-fw"></i>문의하기</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i>자주묻는질문</a>
+                        <a th:href="@{/article/list(cate=faq)}"><i class="fa fa-edit fa-fw"></i>자주묻는질문</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>이벤트</a>
+                        <a th:href="@{/article/list(cate=event)}"><i class="fa fa-wrench fa-fw"></i>이벤트</a>
                     </li>
 
                 </ul>
@@ -303,7 +302,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">공지사항</h1>
+                    <th:block th:switch="${pageRequestDTO.cate}">
+                        <h1 th:case="notice" class="page-header">공지사항</h1>
+                        <h1 th:case="free" class="page-header">자유게시판</h1>
+                        <h1 th:case="qna" class="page-header">문의하기</h1>
+                        <h1 th:case="faq" class="page-header">자주묻는질문</h1>
+                        <h1 th:case="event" class="page-header">이벤트</h1>
+                    </th:block>
                 </div>
                 <!-- 내용 시작 -->
                 <div class="col-lg-12">

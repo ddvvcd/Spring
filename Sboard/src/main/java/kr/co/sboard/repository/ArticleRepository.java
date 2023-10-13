@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer> {
 
 
-    public Page<ArticleEntity> findByParent(int parent, Pageable pageable);
+    public Page<ArticleEntity> findByParentAndCate(int parent, String cate, Pageable pageable);
 
 
 

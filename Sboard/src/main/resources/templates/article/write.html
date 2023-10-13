@@ -6,8 +6,9 @@
         <div class="sboard-register panel">
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <form th:action="@{/article/register}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/article/write}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="writer" th:value="${#authentication.principal.user.uid}">
+                    <input type="text" name="cate" th:value="${pageRequestDTO.cate}">
                     <div class="form-group">
                         <label>제목</label>
                         <input name="title" class="form-control" placeholder="제목을 입력하세요.">
